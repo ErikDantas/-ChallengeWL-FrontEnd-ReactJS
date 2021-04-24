@@ -1,16 +1,16 @@
 import { Component } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "./ComponentesCSS.css";
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'; 
+import './ComponentesCSS.css'
 
 
 
 export default class Colaboradores extends Component{
 
     state = {
-        id: "",
         nome: "",
         cpf: "",
+        cafeDaManha: "",
         colaboradores: []
     }
 
@@ -21,6 +21,10 @@ export default class Colaboradores extends Component{
 
     funcNomeSocialChange = (event) => {
         this.setState({nome: event.target.value})
+    }
+
+    funcCafeChange = (event) => {
+        this.setState({cafeDaManha: event.target.value})
     }
 
 
@@ -39,13 +43,15 @@ export default class Colaboradores extends Component{
     editarColaboradorAux = (colaborador) => {
         this.setState({nome: colaborador.nome})
         this.setState({cpf: colaborador.cpf})
-        this.setState({id: colaborador.id})
+        this.setState({cafeDaManha: colaborador.cafeDaManha})
+
     }
 
     editarColaborador = () => {
         const alterarcolaborador = {
             nome: this.state.nome,
-            cpf: this.state.cpf
+            cpf: this.state.cpf,
+            cafeDaManha: this.state.cafeDaManha
         }
 
 
@@ -57,7 +63,7 @@ export default class Colaboradores extends Component{
             body: JSON.stringify(alterarcolaborador)
         }
 
-        const url = 'http://localhost:8080/colaborador/alterar/'+this.state.id
+        const url = 'http://localhost:8080/colaborador/alterar/'+this.state.cpf
 
 
         fetch(url, requestOptions)
@@ -65,7 +71,7 @@ export default class Colaboradores extends Component{
                 if(response.status===200){
                     toast.success("Colaborador alterado com sucesso.")
                     this.preencherTabela()
-                    this.setState({nome: "", cpf:""})
+                    this.zerarVariaveis()
                 }else{
                     toast.error("Falha ao alterar colaborador")
                 }
@@ -74,14 +80,15 @@ export default class Colaboradores extends Component{
     }
 
     zerarVariaveis = () => {
-        this.setState({nome: "", cpf:""})
+        this.setState({nome: "", cpf:"", cafeDaManha: ""})
     }
 
 
     gravarNovoColaborador = () => {
         const colaborador = {
             "nome": this.state.nome,
-            "cpf": this.state.cpf
+            "cpf": this.state.cpf,
+            "cafeDaManha": this.state.cafeDaManha
         }
 
 
@@ -101,9 +108,9 @@ export default class Colaboradores extends Component{
                 if(response.status===200){
                     toast.success("Colaborador inserido com sucesso.")
                     this.preencherTabela()
-                    this.setState({nome: "", cpf:""})
+                    this.zerarVariaveis()
                 }else{
-                    toast.error("Falha ao inserir novo colaborador")
+                    toast.error("Falha ao inserir novo colaborador. Por favor, verifique o CPF ou a Opção de Café, ambos não podem ser repetidos.")
                 }
             })
 
@@ -118,7 +125,7 @@ export default class Colaboradores extends Component{
             }
         }
 
-        const url = 'http://localhost:8080/colaborador/'+colaborador.id
+        const url = 'http://localhost:8080/colaborador/'+colaborador.cpf
 
         fetch(url, requestOptions)
             .then(response => {
@@ -161,6 +168,10 @@ export default class Colaboradores extends Component{
                                         <label className="form-label">Cpf</label>
                                         <input value={this.state.cpf} onChange={this.funcCpfChange} maxLength='11' type="text" className="form-control" ></input>
                                     </div>
+                                    <div className="col-5 mt-2">
+                                        <label className="form-label">Opção de Café da Manhã</label>
+                                        <input value={this.state.cafeDaManha} onChange={this.funcCafeChange} maxLength='50' type="text" className="form-control" ></input>
+                                    </div>
                                 </form>
                             </div>
                             <div className="modal-footer">
@@ -189,6 +200,10 @@ export default class Colaboradores extends Component{
                                         <label className="form-label">Cpf</label>
                                         <input value={this.state.cpf} onChange={this.funcCpfChange} maxLength='11' type="text" className="form-control" ></input>
                                     </div>
+                                    <div className="col-5 mt-2">
+                                        <label className="form-label">Opção de Café da Manhã</label>
+                                        <input value={this.state.cafeDaManha} onChange={this.funcCafeChange} maxLength='50' type="text" className="form-control" ></input>
+                                    </div>
                                 </form>
                             </div>
                             <div className="modal-footer">
@@ -202,18 +217,18 @@ export default class Colaboradores extends Component{
                         <table className="table table-striped table-hover table-responsive mt-4 mb-5">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Id</th>
                                         <th scope="col">Nome</th>
                                         <th scope="col">Cpf</th>
+                                        <th scope="col">Opção de Café da Manhã</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {this.state.colaboradores && this.state.colaboradores.map(cliente => {
-                                        return <tr key={cliente.id}>
-                                            <th scope="row">{cliente.id}</th>
+                                        return <tr key={cliente.cpf}>
+                                            <th scope="row">{cliente.cpf}</th>
                                             <td>{cliente.nome}</td>
-                                            <td>{cliente.cpf}</td>
+                                            <td>{cliente.cafeDaManha}</td>
                                             <td>
                                                 <div className="btn-group">
                                                     <div className="m-1">

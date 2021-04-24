@@ -12,7 +12,6 @@ export default class Menu extends Component{
                     <div className="text-white p-2">
                         <Link className="navbar-brand text-white" to="/"><i className="bi bi-house"></i></Link>
                         <Link className="navbar-brand text-white" to="/colaboradores">Colaboradores</Link>
-                        <Link className="navbar-brand text-white" to="/cafedamanha">Café da Manha</Link>
                     </div>
                 </nav>  
             </div>
