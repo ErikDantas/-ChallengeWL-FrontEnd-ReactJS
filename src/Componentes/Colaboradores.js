@@ -232,11 +232,11 @@ export default class Colaboradores extends Component{
                                             <td>
                                                 <div className="btn-group">
                                                     <div className="m-1">
-                                                        <button onClick={() => this.editarColaboradorAux(cliente)} data-bs-toggle="modal" data-bs-target="#ModalAlterarColaborador" className="btn btn-sm btn-info"><i className="bi bi-pencil-square"></i></button>
+                                                        <button onClick={() => this.editarColaboradorAux(cliente)} data-bs-toggle="modal" data-bs-target="#ModalAlterarColaborador" className="btn btn-sm btn-info"><i className="bi bi-pencil-square"></i>Editar</button>
                                                     </div>
                                                     
                                                     <div className="m-1">
-                                                        <button onClick={() => this.deletarColaborador(cliente)} className="btn btn-sm btn-warning"><i className="bi bi-trash"></i></button>
+                                                        <button onClick={() => this.deletarColaborador(cliente)} className="btn btn-sm btn-warning"><i className="bi bi-trash"></i>Deletar</button>
                                                     </div>
                                                 </div>
                                             </td>
