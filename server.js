@@ -1,5 +1,5 @@
 const express = require('express')
-const {resolve} = requiere('path')
+const {resolve} = require('path')
 
 
 const app = express()
