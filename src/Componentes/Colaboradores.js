@@ -160,7 +160,7 @@ export default class Colaboradores extends Component{
                             </div>
                             <div className="modal-body">
                                 <form className="form-group textoright">
-                                    <div className="col-3">
+                                    <div className="col-8">
                                         <label className="form-label">Nome</label>
                                         <input value={this.state.nome} onChange={this.funcNomeSocialChange} maxLength='30' type="text" className="form-control" autoFocus></input>
                                     </div>
@@ -192,7 +192,7 @@ export default class Colaboradores extends Component{
                             </div>
                             <div className="modal-body">
                                 <form className="form-group textoright">
-                                    <div className="col-3">
+                                    <div className="col-8">
                                         <label className="form-label">Nome</label>
                                         <input value={this.state.nome} onChange={this.funcNomeSocialChange} maxLength='30' type="text" className="form-control" autoFocus></input>
                                     </div>
